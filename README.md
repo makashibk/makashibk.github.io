@@ -19,8 +19,6 @@
 
 This repository is the source for [makashibk.github.io](https://makashibk.github.io/), the landing page that links to all of MakashibK's SEO tools in one place. It is a single, static `index.html` file with inline CSS and a small amount of vanilla JavaScript. There is no framework, no build step, and no dependencies to install.
 
-The interface is modeled on the look and feel of Google Search Console: a top bar with search, a left sidebar, an Overview page, and bordered cards. That way it feels familiar to the SEOs and developers who use these tools.
-
 ## The tools
 
 | Tool | Type | What it does | Links |
@@ -31,7 +29,6 @@ The interface is modeled on the look and feel of Google Search Console: a top ba
 
 ## Features of the site
 
-- **Search Console-style layout.** Top bar, collapsible sidebar, Overview heading, info banner, and tool cards with clear actions.
 - **Live search.** Type in the search box to filter the tools. Press **Enter** to open the first match, or press **/** anywhere on the page to jump to the search box.
 - **Light and dark mode.** Follows your operating system setting automatically.
 - **Responsive.** On phones the sidebar becomes a slide-out drawer, and the cards stack into one column.
