@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Free SEO Tools by MakashibK: Robots.txt Validator, Log Analyzer, Chrome Extension</title>
+<meta name="description" content="Free SEO tools by MakashibK: a robots.txt validator and tester, an SEO log file analyzer, and a Chrome SEO extension that audits any page in one click.">
+<link rel="canonical" href="https://makashibk.github.io/">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#202124" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free SEO Tools by MakashibK">
+<meta property="og:description" content="Robots.txt validator, SEO log file analyzer, and a Chrome SEO extension. Free, with the source code on GitHub.">
+<meta property="og:url" content="https://makashibk.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a73e8'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='%23fff' font-weight='800' font-size='19' font-family='Arial,sans-serif'%3EM%3C/text%3E%3C/svg%3E">
+
+<!-- Two separate font requests: if one ever fails, the other still loads. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!--
+  EDIT THESE if your names differ. Search this file for "makashibk" and update:
+    Hub site ........ https://makashibk.github.io/
+    Robots tool ..... https://makashibk.github.io/robots-txt-validator/   (repo: robots-txt-validator)
+    Log analyzer .... https://makashibk.github.io/seo-log-file-analyzer/  (repo: seo-log-file-analyzer)
+    Chrome extension  https://github.com/makashibk/chrome-seo-extension   (repo: chrome-seo-extension)
+    Hub repo ........ https://github.com/makashibk/makashibk.github.io
+-->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://makashibk.github.io/#website",
+      "url": "https://makashibk.github.io/",
+      "name": "SEO Tools by MakashibK",
+      "author": { "@type": "Person", "name": "MakashibK", "url": "https://github.com/makashibk" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "SEO tools by MakashibK",
+      "itemListElement": [
+        {
+          "@type": "ListItem", "position": 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Robots.txt Validator & Tester",
+            "url": "https://makashibk.github.io/robots-txt-validator/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any (web browser)"
+          }
+        },
+        {
+          "@type": "ListItem", "position": 2,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "SEO Log File Analyzer",
+            "url": "https://makashibk.github.io/seo-log-file-analyzer/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Any (web browser)"
+          }
+        },
+        {
+          "@type": "ListItem", "position": 3,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "SEO Extension for Chrome",
+            "url": "https://github.com/makashibk/chrome-seo-extension",
+            "applicationCategory": "BrowserApplication",
+            "operatingSystem": "Chrome"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --ink: #202124;
+  --muted: #5f6368;
+  --line: #dadce0;
+  --hover: rgba(60, 64, 67, .08);
+  --search-bg: #f1f3f4;
+  --blue: #1a73e8;
+  --blue-text: #1967d2;
+  --active-bg: #e8f0fe;
+  --active-ink: #1967d2;
+  --notice-bg: #e8f0fe;
+  --green: #188038;
+  --focus: #1a73e8;
+
+  --tint-blue: #e8f0fe;   --ink-blue: #1a73e8;
+  --tint-purple: #f3e8fd; --ink-purple: #9334e6;
+  --tint-orange: #fef0cd; --ink-orange: #c26401;
+
+  --font-ui: 'Google Sans Flex', 'Google Sans', Roboto, Arial, sans-serif;
+  --font-body: Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --topbar-h: 64px;
+  --sidebar-w: 256px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #202124;
+    --surface: #292a2d;
+    --ink: #e8eaed;
+    --muted: #9aa0a6;
+    --line: #3c4043;
+    --hover: rgba(232, 234, 237, .08);
+    --search-bg: #303134;
+    --blue: #8ab4f8;
+    --blue-text: #8ab4f8;
+    --active-bg: #394457;
+    --active-ink: #8ab4f8;
+    --notice-bg: #2a3242;
+    --green: #81c995;
+    --focus: #8ab4f8;
+
+    --tint-blue: #26374f;   --ink-blue: #8ab4f8;
+    --tint-purple: #382a4d; --ink-purple: #d7aefb;
+    --tint-orange: #46361b; --ink-orange: #fdd663;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+svg { display: block; flex: none; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+[hidden] { display: none !important; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+.skip {
+  position: absolute; left: 12px; top: -64px; z-index: 100;
+  background: var(--surface); color: var(--ink);
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 4px;
+  transition: top .15s;
+}
+.skip:focus { top: 12px; }
+
+/* ── Top bar ── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--topbar-h);
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 12px 0 8px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.icon-btn {
+  width: 48px; height: 48px; flex: none;
+  display: inline-grid; place-items: center;
+  border: 0; border-radius: 50%; background: transparent;
+  color: var(--muted); cursor: pointer;
+}
+.icon-btn:hover { background: var(--hover); }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  min-width: 190px; padding-right: 16px;
+  font-family: var(--font-ui); font-size: 22px; font-weight: 400; color: var(--muted);
+  white-space: nowrap;
+}
+.logo b { font-weight: 500; color: var(--ink); }
+.search { position: relative; flex: 1; max-width: 720px; margin: 0 auto 0 0; }
+.search svg { position: absolute; left: 16px; top: 13px; color: var(--muted); pointer-events: none; }
+.search input {
+  width: 100%; height: 46px;
+  padding: 0 16px 0 52px;
+  border: 1px solid transparent; border-radius: 8px;
+  background: var(--search-bg); color: var(--ink);
+  font: 400 16px var(--font-body);
+}
+.search input::placeholder { color: var(--muted); }
+.search input:focus {
+  outline: none; background: var(--surface);
+  box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+}
+.search input:focus-visible { outline: 2px solid var(--focus); outline-offset: 0; border-radius: 8px; }
+.top-actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.avatar {
+  width: 32px; height: 32px; margin: 0 4px 0 8px;
+  border-radius: 50%; display: grid; place-items: center;
+  background: var(--blue); color: #fff;
+  font: 500 15px var(--font-ui);
+}
+@media (prefers-color-scheme: dark) { .avatar { color: #202124; } }
+
+/* ── Sidebar ── */
+.sidebar {
+  position: fixed; top: var(--topbar-h); bottom: 0; left: 0; z-index: 40;
+  width: var(--sidebar-w);
+  padding: 8px 0 24px;
+  overflow-y: auto;
+  background: var(--bg);
+  transition: transform .2s ease, visibility 0s linear 0s;
+}
+.property {
+  display: flex; align-items: center; gap: 12px;
+  margin: 8px 16px 12px; padding: 9px 12px;
+  border: 1px solid var(--line); border-radius: 4px;
+  font-size: 14px; color: var(--ink);
+}
+.property svg { color: var(--muted); }
+.property span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-heading {
+  margin: 0; padding: 18px 24px 6px;
+  font: 500 12px var(--font-ui); color: var(--muted); letter-spacing: .2px;
+}
+.nav a {
+  display: flex; align-items: center; gap: 16px;
+  height: 40px; margin-right: 12px; padding: 0 14px 0 24px;
+  border-radius: 0 20px 20px 0;
+  font: 500 14px var(--font-ui); color: var(--ink);
+}
+.nav a:hover { background: var(--hover); }
+.nav a[aria-current="page"] { background: var(--active-bg); color: var(--active-ink); }
+.nav a > svg:first-child { color: var(--muted); }
+.nav a[aria-current="page"] > svg:first-child { color: var(--active-ink); }
+.nav a .ext { margin-left: auto; color: var(--muted); }
+.nav a span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.scrim { display: none; }
+
+/* ── Main ── */
+.main { margin-left: var(--sidebar-w); padding: 28px 32px 32px; transition: margin-left .2s ease; }
+body.nav-collapsed .main { margin-left: 0; }
+body.nav-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; transition: transform .2s ease, visibility 0s linear .2s; }
+.page-title { margin: 0 0 20px; font: 400 24px/32px var(--font-ui); }
+.content { max-width: 1240px; }
+
+.notice {
+  display: flex; align-items: flex-start; gap: 16px;
+  margin: 0 0 24px; padding: 16px 20px;
+  background: var(--notice-bg); border-radius: 8px;
+  color: var(--ink); font-size: 14px;
+}
+.notice svg { color: var(--blue); margin-top: 1px; }
+.notice p { margin: 0; max-width: 70ch; }
+
+.grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+.card {
+  display: flex; flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: 8px;
+}
+.card-head { display: flex; align-items: center; gap: 16px; padding: 20px 24px 0; }
+.tile { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.tile-blue   { background: var(--tint-blue);   color: var(--ink-blue); }
+.tile-purple { background: var(--tint-purple); color: var(--ink-purple); }
+.tile-orange { background: var(--tint-orange); color: var(--ink-orange); }
+.card h2 { margin: 0; font: 500 16px/22px var(--font-ui); color: var(--ink); }
+.sub { margin: 0; color: var(--muted); font-size: 13px; }
+.card-body { flex: 1; padding: 16px 24px 20px; }
+.desc { margin: 0 0 16px; color: var(--muted); }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.checks li { display: flex; align-items: flex-start; gap: 12px; color: var(--ink); }
+.checks svg { color: var(--green); margin-top: 1px; }
+.card-foot {
+  display: flex; justify-content: flex-end; gap: 4px;
+  padding: 8px 12px; border-top: 1px solid var(--line);
+}
+.text-btn {
+  padding: 8px 12px; border-radius: 4px;
+  font: 500 14px var(--font-ui); letter-spacing: .25px; text-transform: uppercase;
+  color: var(--muted);
+}
+.text-btn:hover { background: var(--hover); }
+.text-btn.primary { color: var(--blue-text); }
+.text-btn.primary:hover { background: rgba(26, 115, 232, .08); }
+
+.empty { padding: 48px 24px; text-align: center; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.empty h2 { margin: 0 0 8px; font: 500 18px var(--font-ui); }
+.empty p { margin: 0 0 16px; color: var(--muted); }
+.empty button {
+  padding: 8px 16px; border: 1px solid var(--line); border-radius: 4px;
+  background: transparent; color: var(--blue-text); cursor: pointer;
+  font: 500 14px var(--font-ui);
+}
+.empty button:hover { background: var(--hover); }
+
+.foot { margin-top: 40px; color: var(--muted); font-size: 12px; }
+.foot a { color: var(--blue-text); }
+.foot a:hover { text-decoration: underline; }
+
+/* ── Small screens: sidebar becomes a drawer ── */
+@media (max-width: 1023px) {
+  .main { margin-left: 0; padding: 20px 16px 28px; }
+  .sidebar {
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform .2s ease, visibility 0s linear .2s;
+    box-shadow: none;
+  }
+  body.nav-open .sidebar {
+    transform: none; visibility: visible;
+    transition: transform .2s ease, visibility 0s linear 0s;
+    box-shadow: 0 8px 10px rgba(0,0,0,.2), 0 16px 24px rgba(0,0,0,.14);
+  }
+  body.nav-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; }
+  body.nav-open.nav-collapsed .sidebar { transform: none; visibility: visible; }
+  .scrim { position: fixed; inset: var(--topbar-h) 0 0 0; z-index: 30; background: rgba(32, 33, 36, .5); }
+  body.nav-open .scrim { display: block; }
+}
+@media (max-width: 719px) {
+  .logo { min-width: 0; padding-right: 8px; }
+  .logo-text { display: none; }
+  .hide-sm { display: none; }
+  .grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .main { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to content</a>
+
+<header class="topbar">
+  <button class="icon-btn" id="menuBtn" type="button" aria-label="Main menu" aria-controls="sidebar" aria-expanded="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+
+  <a class="logo" href="/" aria-label="MakashibK SEO Tools home">
+    <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1a73e8"/><text x="16" y="23" text-anchor="middle" fill="#fff" font-weight="800" font-size="19" font-family="Arial,sans-serif">M</text></svg>
+    <span class="logo-text"><b>MakashibK</b> SEO Tools</span>
+  </a>
+
+  <form class="search" id="searchForm" role="search">
+    <label class="sr-only" for="q">Search tools</label>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="q" type="search" autocomplete="off" placeholder="Search tools">
+  </form>
+
+  <div class="top-actions">
+    <a class="icon-btn hide-sm" href="https://github.com/makashibk/makashibk.github.io/issues" title="Help and feedback" aria-label="Help and feedback">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </a>
+    <a class="icon-btn hide-sm" href="https://github.com/makashibk?tab=repositories" title="All repositories" aria-label="All repositories">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </a>
+    <a class="avatar" href="https://github.com/makashibk" title="MakashibK on GitHub" aria-label="MakashibK on GitHub">M</a>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+
+<nav class="sidebar" id="sidebar" aria-label="Main">
+  <a class="property" href="/">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <span>makashibk.github.io</span>
+  </a>
+
+  <div class="nav">
+    <a href="#overview" aria-current="page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Overview</span>
+    </a>
+
+    <p class="nav-heading">Tools</p>
+    <a href="https://makashibk.github.io/robots-txt-validator/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+      <span>Robots.txt validator</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <a href="https://makashibk.github.io/seo-log-file-analyzer/">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <span>Log file analyzer</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <a href="https://github.com/makashibk/chrome-seo-extension">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+      <span>Chrome extension</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+
+    <p class="nav-heading">Links</p>
+    <a href="https://github.com/makashibk">
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span>GitHub profile</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <a href="https://github.com/makashibk?tab=repositories">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <span>All repositories</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <a href="https://github.com/makashibk/makashibk.github.io/issues">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>Send feedback</span>
+      <svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</nav>
+
+<main class="main" id="overview">
+  <div class="content">
+    <h1 class="page-title">Overview</h1>
+
+    <div class="notice">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p>Free tools for technical SEO audits. No sign-up needed, and the source code for every tool is on GitHub.</p>
+    </div>
+
+    <section class="grid" id="cards" aria-label="SEO tools">
+
+      <!-- Robots.txt Validator -->
+      <article class="card tool-card" data-search="robots.txt robots validator tester crawler allow disallow googlebot web tool">
+        <div class="card-head">
+          <span class="tile tile-blue" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg>
+          </span>
+          <div>
+            <h2>Robots.txt Validator &amp; Tester</h2>
+            <p class="sub">Web tool</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="desc">Check what your robots.txt allows and blocks before a crawler finds out.</p>
+          <ul class="checks">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Fetch a live robots.txt or paste your own</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Test any URL against a crawler you choose</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>See which rule allows or blocks it</li>
+          </ul>
+        </div>
+        <div class="card-foot">
+          <a class="text-btn" href="https://github.com/makashibk/robots-txt-validator">Source</a>
+          <a class="text-btn primary" data-primary href="https://makashibk.github.io/robots-txt-validator/">Open tool</a>
+        </div>
+      </article>
+
+      <!-- Log File Analyzer -->
+      <article class="card tool-card" data-search="seo log file analyzer server logs bots crawl budget googlebot errors web tool">
+        <div class="card-head">
+          <span class="tile tile-purple" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </span>
+          <div>
+            <h2>SEO Log File Analyzer</h2>
+            <p class="sub">Web tool</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="desc">See how search engine bots really crawl your site, straight from your server logs.</p>
+          <ul class="checks">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Analyze server log files</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>See which bots visit and which URLs they request</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Spot crawl errors and wasted requests</li>
+          </ul>
+        </div>
+        <div class="card-foot">
+          <a class="text-btn" href="https://github.com/makashibk/seo-log-file-analyzer">Source</a>
+          <a class="text-btn primary" data-primary href="https://makashibk.github.io/seo-log-file-analyzer/">Open tool</a>
+        </div>
+      </article>
+
+      <!-- Chrome Extension -->
+      <article class="card tool-card" data-search="chrome seo extension audit meta tags indexability schema json-ld open graph twitter headers images links excel browser">
+        <div class="card-head">
+          <span class="tile tile-orange" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+          </span>
+          <div>
+            <h2>SEO Extension for Chrome</h2>
+            <p class="sub">Chrome extension</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="desc">Audit any page in one click, without leaving the tab.</p>
+          <ul class="checks">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Meta tags, headings, and indexability</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Schema, Open Graph, and Twitter tags</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>HTTP headers, images, and links, with Excel export</li>
+          </ul>
+        </div>
+        <div class="card-foot">
+          <a class="text-btn" href="https://github.com/makashibk/chrome-seo-extension#installation">Install</a>
+          <a class="text-btn primary" data-primary href="https://github.com/makashibk/chrome-seo-extension">View on GitHub</a>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="empty" id="empty" hidden>
+      <h2>No tools match &ldquo;<span id="emptyQ"></span>&rdquo;</h2>
+      <p>Try &ldquo;robots&rdquo;, &ldquo;log&rdquo;, or &ldquo;Chrome&rdquo;.</p>
+      <button type="button" id="clearBtn">Clear search</button>
+    </div>
+
+    <footer class="foot">
+      <p>Built by <a href="https://github.com/makashibk">MakashibK</a>. Crawlers welcome.</p>
+    </footer>
+  </div>
+</main>
+
+<script>
+(function () {
+  var body = document.body;
+  var menuBtn = document.getElementById('menuBtn');
+  var scrim = document.getElementById('scrim');
+  var desktop = window.matchMedia('(min-width: 1024px)');
+
+  function syncMenuState() {
+    var open = desktop.matches
+      ? !body.classList.contains('nav-collapsed')
+      : body.classList.contains('nav-open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
+  function closeDrawer() {
+    body.classList.remove('nav-open');
+    syncMenuState();
+  }
+
+  menuBtn.addEventListener('click', function () {
+    if (desktop.matches) body.classList.toggle('nav-collapsed');
+    else body.classList.toggle('nav-open');
+    syncMenuState();
+  });
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && body.classList.contains('nav-open')) { closeDrawer(); menuBtn.focus(); }
+  });
+  document.getElementById('sidebar').addEventListener('click', function (e) {
+    if (!desktop.matches && e.target.closest('a')) closeDrawer();
+  });
+  (desktop.addEventListener ? desktop.addEventListener('change', function () { body.classList.remove('nav-open'); syncMenuState(); })
+                            : desktop.addListener(function () { body.classList.remove('nav-open'); syncMenuState(); }));
+  syncMenuState();
+
+  /* ── Search: filter tools, Enter opens the first match, "/" focuses the box ── */
+  var input = document.getElementById('q');
+  var form = document.getElementById('searchForm');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.tool-card'));
+  var empty = document.getElementById('empty');
+  var emptyQ = document.getElementById('emptyQ');
+  var grid = document.getElementById('cards');
+
+  function filter() {
+    var raw = input.value.trim();
+    var q = raw.toLowerCase();
+    var shown = 0;
+    cards.forEach(function (c) {
+      var match = !q || (c.getAttribute('data-search') + ' ' + c.textContent.toLowerCase()).indexOf(q) !== -1;
+      c.hidden = !match;
+      if (match) shown++;
+    });
+    grid.hidden = shown === 0;
+    empty.hidden = shown !== 0;
+    emptyQ.textContent = raw;
+  }
+  input.addEventListener('input', filter);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!input.value.trim()) return;
+    var first = document.querySelector('.tool-card:not([hidden]) a[data-primary]');
+    if (first) window.location.href = first.href;
+  });
+  document.getElementById('clearBtn').addEventListener('click', function () {
+    input.value = ''; filter(); input.focus();
+  });
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    var typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    if (e.key === '/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault(); input.focus();
+    }
+  });
+})();
+</script>
+</body>
+</html>
