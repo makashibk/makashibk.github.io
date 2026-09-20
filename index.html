@@ -250,15 +250,6 @@ body.nav-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; 
 .page-title { margin: 0 0 20px; font: 400 24px/32px var(--font-ui); }
 .content { max-width: 1240px; }
 
-.notice {
-  display: flex; align-items: flex-start; gap: 16px;
-  margin: 0 0 24px; padding: 16px 20px;
-  background: var(--notice-bg); border-radius: 8px;
-  color: var(--ink); font-size: 14px;
-}
-.notice svg { color: var(--blue); margin-top: 1px; }
-.notice p { margin: 0; max-width: 70ch; }
-
 .grid { display: grid; gap: 24px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 
 .card {
@@ -417,12 +408,6 @@ body.nav-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; 
 <main class="main" id="overview">
   <div class="content">
     <h1 class="page-title">Overview</h1>
-
-    <div class="notice">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-      <p>Free tools for technical SEO audits. No sign-up needed, and the source code for every tool is on GitHub.</p>
-    </div>
-
     <section class="grid" id="cards" aria-label="SEO tools">
 
       <!-- Robots.txt Validator -->
@@ -509,7 +494,7 @@ body.nav-collapsed .sidebar { transform: translateX(-100%); visibility: hidden; 
     </div>
 
     <footer class="foot">
-      <p>Built by <a href="https://github.com/makashibk">MakashibK</a>. Crawlers welcome.</p>
+      <p>Built by <a href="https://github.com/makashibk">MakashibK</a>.</p>
     </footer>
   </div>
 </main>
