@@ -1,6 +1,6 @@
 <div align="center">
 
-# MakashibK SEO Tools
+# SEO Tools
 
 **The home page for a small collection of free SEO tools: a robots.txt validator, an SEO log file analyzer, and a Chrome SEO extension.**
 
